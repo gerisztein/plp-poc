@@ -21,16 +21,16 @@ export default {
     classes () {
       return [
         'stars-container',
-        `stars-${Math.round(this.starRating / 5) * 5}`
+        `stars-${this.starRating}`
       ]
     },
 
     starRating () {
-      return this.rating
+      return Math.round(this.rating / 5) * 5
     },
 
     title () {
-      return `Average rating: ${this.rating}`
+      return `Average rating: ${this.rating / 20} (${this.rating}%)`
     }
 
   },
