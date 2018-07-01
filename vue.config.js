@@ -1,3 +1,5 @@
 module.exports = {
-  baseUrl: '/plp-poc'
+  baseUrl: process.env.NODE_ENV === 'pages'
+    ? '/plp-poc'
+    : '/'
 }
