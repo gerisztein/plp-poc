@@ -3,17 +3,23 @@ import * as types from './mutation-types'
 
 const actions = {
   filterProducts ({ commit, dispatch, state }) {
-    const hasFilters = Object
-      .keys(state.activeFilters)
-      .map(type => !!state.activeFilters[type].length)
+    const filters = {}
+
+    for (let filter in state.activeFilters) {
+      if (state.activeFilters[filter].length) {
+        filters[filter] = state.activeFilters[filter]
+      }
+    }
+
+    const filterKeys = Object.keys(filters)
+    const hasFilters = filterKeys
+      .map(type => !!filters[type].length)
       .reduce((a, b) => a || b, false)
 
     if (hasFilters) {
-      const filtered = Object.keys(state.activeFilters).map((filter, key) => {
-        return state.productList.filter(item => {
-          return state.activeFilters[filter].includes(item[filter])
-        }).filter(Boolean)
-      }).filter(Boolean)
+      const filtered = products.filter((item) => {
+        return filterKeys.every(key => !!~filters[key].indexOf(item[key]))
+      })
 
       commit(types.SET_PRODUCT_LIST, filtered)
     }
@@ -47,13 +53,14 @@ const actions = {
     commit(types.SET_FILTER_LIST, filters)
   },
 
-  getProducts ({ commit, dispatch }) {
+  getProducts ({ commit, dispatch, state }) {
     commit(types.SET_PRODUCT_LIST, products)
+    dispatch('setSorting', state.activeSorting)
     dispatch('getFilterList', products)
   },
 
-  setFilter ({ commit, dispatch }, data) {
-    commit(types.SET_ACTIVE_FILTER, data)
+  setFilter ({ commit, dispatch }, option, type) {
+    commit(types.SET_ACTIVE_FILTER, option, type)
     dispatch('filterProducts')
   },
 
@@ -64,13 +71,13 @@ const actions = {
 
     let sorted = state.productList.sort((a, b) => {
       if (type === 'price' || type === 'rating') {
-        return a[type] - b[type]
+        return b[type] - a[type]
       }
 
-      return a[type].localeCompare(b[type])
+      return b[type].localeCompare(a[type])
     })
 
-    if (order === 'desc') {
+    if (order === 'asc') {
       sorted = sorted.reverse()
     }
 
