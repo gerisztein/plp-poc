@@ -7,12 +7,6 @@
     :class="{ active: option.value === sorting }",
     @click="sort(option.value)"
   )
-  //- select(v-model="model", @change='sort')
-    option(
-      v-for="option in options",
-      :value="option.value",
-      v-text="option.label"
-    )
 </template>
 
 <script>
@@ -44,7 +38,7 @@ export default {
         {
           label: 'Name (Z-A)',
           value: 'name-desc'
-        },
+        }
       ]
     },
     selected: {
@@ -70,7 +64,6 @@ export default {
     ...mapActions(['getProducts', 'setFilter', 'setSorting']),
 
     sort (value) {
-      console.log('value', value)
       this.setSorting(value)
     }
   }
@@ -92,6 +85,7 @@ export default {
     font-size .85rem
 
     &.active
+      pointer-events none
       font-weight 700
 
     &:not(:last-child):after
