@@ -21,7 +21,6 @@ const actions = {
     if (!hasFilters) {
       dispatch('getProducts')
     }
-
   },
 
   getFilterList ({ commit }, data) {
