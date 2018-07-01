@@ -1,8 +1,11 @@
 const getters = {
-  productList: (state) => {
-    console.log(state)
-    return state.productList
-  }
+  activeFilters: (state) => state.activeFilters,
+
+  activeSorting: (state) => state.activeSorting,
+
+  filterList: (state) => state.filterList,
+
+  productList: (state) => state.productList
 }
 
 export default getters

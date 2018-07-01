@@ -1,1 +1,4 @@
+export const SET_ACTIVE_FILTER = 'SET_ACTIVE_FILTER'
+export const SET_SORT = 'SET_SORT'
+export const SET_FILTER_LIST = 'SET_FILTER_LIST'
 export const SET_PRODUCT_LIST = 'SET_PRODUCT_LIST'
