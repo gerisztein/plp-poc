@@ -6,9 +6,9 @@ const mutations = {
       const index = state.activeFilters[type].indexOf(option)
 
       state.activeFilters[type].splice(index, 1)
-    } else {
-      state.activeFilters[type].push(option)
+      return
     }
+    state.activeFilters[type] = option
   },
 
   [types.SET_FILTER_LIST] (state, payload) {
