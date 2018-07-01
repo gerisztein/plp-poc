@@ -1,6 +1,6 @@
 <template lang="pug">
   .main
-    ProductFilter()
+    //- ProductFilter()
     ProductList()
 </template>
 

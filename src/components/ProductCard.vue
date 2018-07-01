@@ -2,8 +2,10 @@
   .product
     .product__image
       img(:src="image", :alt="name")
-    .product__name(v-text="formattedName")
-    .product__type(v-text="type")
+    .product__name
+      div(v-text="brand")
+      div(v-text="formattedName")
+      .product__type(v-text="type")
     .product__details
       div
         .product__price(v-text="formattedPrice")
@@ -20,6 +22,11 @@ export default {
     StarRating
   },
   props: {
+    brand: {
+      type: String,
+      required: true,
+      default: ''
+    },
     id: {
       type: String,
       required: true,
@@ -63,7 +70,7 @@ export default {
   },
   computed: {
     formattedName () {
-      return this.name.replace(this.type, '').trim()
+      return this.name.replace(this.type, '').replace(this.brand, '').trim()
     },
 
     formattedPrice () {
@@ -103,11 +110,13 @@ export default {
   &__name
     font-size 1rem
     font-weight 700
+    min-height 85px
     padding 0 16px
     text-align center
 
   &__type
     font-size .75rem
+    font-weight 100
     text-align center
 
   &__details

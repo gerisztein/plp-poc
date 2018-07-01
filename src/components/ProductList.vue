@@ -3,9 +3,10 @@
     .products__header
       h1 Parfum
     .products__sort
+      ProductFilter
       .products__filter
         template(v-for="(filter, name) in activeFilters")
-          .products__filter__title(v-text="name", v-if="filter.length")
+          //- .products__filter__title(v-text="name", v-if="filter.length")
           span.products__filter__option(v-for="option in filter", @click="removeFilter({ option: option, type: name })")
             span.products__filter__option--close X
             span(v-text="option")
@@ -14,6 +15,7 @@
     .products__list
       template(v-for="(product, index) in productList")
         ProductCard(
+          :brand="product.brand",
           :id="product.id",
           :image="product.image",
           :key="product.id",
@@ -29,12 +31,14 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ProductCard from './ProductCard'
+import ProductFilter from './ProductFilter'
 import Sorting from './Sorting'
 
 export default {
   name: 'ProductList',
   components: {
     ProductCard,
+    ProductFilter,
     Sorting
   },
   mounted () {
@@ -63,16 +67,23 @@ export default {
 
 <style scoped lang="stylus">
 .products
+  display flex
+  flex-flow row wrap
   overflow hidden
   width 100%
 
+  &__header
+    flex-basis 40%
+
   h1
     font-size 3rem
+    font-weight 700
     margin 0
 
   &__filter
     display flex
     flex-flow row wrap
+    margin-bottom 8px
     overflow hidden
 
     &__title
@@ -108,5 +119,5 @@ export default {
     flex-flow row wrap
     overflow hidden
     padding 16px 0
-
+    width 100%
 </style>
