@@ -6,6 +6,7 @@
 
   &.noscroll
     +mobile()
+      height 100vh
       overflow hidden
       position fixed
       top 0
@@ -32,7 +33,7 @@
     margin-bottom 8px
     overflow hidden
 
-    +tablet()
+    +desktop()
       display flex
       justify-content flex-end
 
@@ -74,7 +75,7 @@
     padding 0 8px
 
     +tablet()
-      flex-flow row
+      flex-flow row wrap
       flex-grow 0
 
     +desktop()
