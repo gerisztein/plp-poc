@@ -9,6 +9,7 @@
 <script>
 export default {
   name: 'StarRating',
+
   props: {
     rating: {
       type: Number,
