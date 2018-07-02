@@ -1,12 +1,18 @@
 <template lang="pug">
-.products__sorting
-  .products__sorting__title Sort by:
-  span.products__sorting__option(
+.sorting
+  .sorting__title.hidden-mobile Sort by:
+  span.sorting__option.hidden-mobile(
     v-for="option in options",
     v-text="option.label",
     :class="{ active: option.value === sorting }",
     @click="sort(option.value)"
   )
+  select.hidden-desktop(v-model="model", @change="sort(model)")
+    option(
+      v-for="option in options",
+      v-text="option.label",
+      :value="option.value"
+    )
 </template>
 
 <script>
@@ -57,6 +63,13 @@ export default {
     ...mapGetters(['activeFilters', 'activeSorting', 'productList']),
 
     sorting () {
+      if (this.$router.currentRoute.query && this.$router.currentRoute.query.sort) {
+        const sort = this.$router.currentRoute.query.sort
+        this.setSorting(sort)
+
+        return sort
+      }
+
       return this.activeSorting
     }
   },
@@ -64,33 +77,16 @@ export default {
     ...mapActions(['getProducts', 'setFilter', 'setSorting']),
 
     sort (value) {
+      console.log(value)
+      this.$router.push({
+        name: 'home',
+        query: {
+          sort: value
+        }
+      })
+
       this.setSorting(value)
     }
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.products__sorting
-  margin-bottom 16px
-  text-align right
-
-  &__title
-    display inline-block
-    font-weight 700
-    margin-right 8px
-
-  &__option
-    cursor pointer
-    font-size .85rem
-
-    &.active
-      pointer-events none
-      font-weight 700
-
-    &:not(:last-child):after
-      color #ccc
-      content "|"
-      font-weight 100
-      margin 0 8px
-</style>
