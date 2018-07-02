@@ -4,7 +4,7 @@
 
 
 # plp-poc
-Product Listing Page (Proof of Concept)
+Product Listing Page
 
 ## TL;DR
 
@@ -20,6 +20,10 @@ or access the [live demo](https://gerisztein.github.io/plp-poc/).
 ## Description
 
 A *proof of concept* of a **PDP** (Product Listing Page) for an e-commerce website using basic **filters** and **sorting**.
+
+The results can be sorted by **Rating**, **Name** (ascending and descending) and **Price** (also ascending and descending) and filtered by **Brand**, **Size** and **Type**.
+
+This project was made using mock data, so the filtering and sorting are using those data instead of making a new request. That's why also there's no pagination so far.
 
 ## Installation
 
