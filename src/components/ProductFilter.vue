@@ -1,25 +1,30 @@
 <template lang="pug">
 .filter
-  .filter__category(v-for="(filter, index) in filterList", :key="index")
-    .filter__category__title(
-      v-text="filter.name",
-      :class="{ active: active[filter.name.toLowerCase()] }",
-      @click="toggleFilter(filter.name)"
-    )
-    .filter__category__container(v-if="active[filter.name.toLowerCase()]")
-      .filter__category__options
+  button.filter__cta(@click='toggleContainer()') Filter
+  .filter__container(:class="{ active: showContainer }")
+    .filter__header
+      .filter__header__title Filters
+      .filter__header__close(@click='toggleContainer()') X
+    .filter__category(v-for="(filter, index) in filterList", :key="index")
+      .filter__category__title(
+        v-text="filter.name",
+        :class="{ active: active[filter.name.toLowerCase()] }",
+        @click="toggleFilter(filter.name)"
+      )
+      .filter__category__container(v-if="active[filter.name.toLowerCase()]")
+        .filter__category__options
 
-        template(v-for="(option, key) in filter.items")
-          label(:for="`${filter.name}_${key}`")
-            input(
-              type="checkbox",
-              :id="`${filter.name}_${key}`",
-              v-model="model[filter.type]",
-              :value="option"
-            )
-            span(v-text="option")
-      .filter__category__action
-        button(@click='selectFilter(filter.type)') Apply
+          template(v-for="(option, key) in filter.items")
+            label(:for="`${filter.name}_${key}`")
+              input(
+                type="checkbox",
+                :id="`${filter.name}_${key}`",
+                v-model="model[filter.type]",
+                :value="option"
+              )
+              span(v-text="option")
+        .filter__category__action
+          button(@click='selectFilter(filter.type)') Apply
 </template>
 
 <script>
@@ -33,6 +38,7 @@ export default {
         sizes: false,
         types: false
       },
+      showContainer: false,
       model: {
         brand: [],
         size: [],
@@ -55,6 +61,11 @@ export default {
       })
       this.setFilter({ option, type })
       this.toggleFilter(type)
+      this.toggleContainer()
+    },
+
+    toggleContainer () {
+      this.showContainer = !this.showContainer
     },
 
     toggleFilter (name) {

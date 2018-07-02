@@ -1,18 +1,21 @@
 <template lang="pug">
 .sorting
   .sorting__title.hidden-mobile Sort by:
-  span.sorting__option.hidden-mobile(
-    v-for="option in options",
-    v-text="option.label",
-    :class="{ active: option.value === sorting }",
-    @click="sort(option.value)"
-  )
-  select.hidden-desktop(v-model="model", @change="sort(model)")
-    option(
+  .sorting__options
+    span.sorting__option.hidden-mobile(
       v-for="option in options",
       v-text="option.label",
-      :value="option.value"
+      :class="{ active: option.value === sorting }",
+      @click="sort(option.value)"
     )
+  .sorting__mobile.hidden-desktop
+    label(for="sort") Sort
+    select(id="sort", v-model="model", @change="sort(model)")
+      option(
+        v-for="option in options",
+        v-text="option.label",
+        :value="option.value"
+      )
 </template>
 
 <script>
