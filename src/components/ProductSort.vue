@@ -23,6 +23,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Sorting',
+
   props: {
     options: {
       type: Array,
@@ -50,6 +51,7 @@ export default {
         }
       ]
     },
+
     selected: {
       type: String,
       required: true,
@@ -62,6 +64,7 @@ export default {
       model: this.selected
     }
   },
+
   computed: {
     ...mapGetters(['activeFilters', 'activeSorting', 'productList']),
 
@@ -76,6 +79,7 @@ export default {
       return this.activeSorting
     }
   },
+
   methods: {
     ...mapActions(['getProducts', 'setFilter', 'setSorting']),
 

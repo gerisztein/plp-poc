@@ -31,6 +31,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'ProductFilter',
+
   data () {
     return {
       active: {
@@ -46,9 +47,11 @@ export default {
       }
     }
   },
+
   computed: {
     ...mapGetters(['activeFilters', 'filterList'])
   },
+
   methods: {
     ...mapActions(['setFilter']),
 
@@ -66,6 +69,7 @@ export default {
 
     toggleContainer () {
       this.showContainer = !this.showContainer
+      this.$emit('active', this.showContainer)
     },
 
     toggleFilter (name) {

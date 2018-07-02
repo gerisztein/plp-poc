@@ -1,9 +1,9 @@
 <template lang="pug">
-  .products
+  .products(:class="{ noscroll: noScroll }")
     .products__header
       h1 Parfum
     .products__sort
-      ProductFilter
+      ProductFilter(@active="blockContainer")
       .products__filter
         template(v-for="(filter, name) in activeFilters")
           //- .products__filter__title(v-text="name", v-if="filter.length")
@@ -36,14 +36,23 @@ import ProductSort from './ProductSort'
 
 export default {
   name: 'ProductList',
+
   components: {
     ProductCard,
     ProductFilter,
     ProductSort
   },
+
+  data () {
+    return {
+      noScroll: false
+    }
+  },
+
   mounted () {
     this.getProducts()
   },
+
   computed: {
     ...mapGetters(['activeFilters', 'activeSorting', 'productList']),
 
@@ -51,8 +60,13 @@ export default {
       return this.activeSorting
     }
   },
+
   methods: {
     ...mapActions(['getProducts', 'setFilter', 'setSorting']),
+
+    blockContainer (status) {
+      this.noScroll = status
+    },
 
     removeFilter (option, type) {
       this.setFilter(option, type)
