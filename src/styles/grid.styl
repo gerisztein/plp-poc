@@ -1,0 +1,27 @@
+$gap = 32px
+$tablet = 769px
+$desktop = 960px
+
+mobile()
+  @media screen and (max-width: ($tablet - 1px))
+    {block}
+
+tablet()
+  @media screen and (min-width: $tablet - 1px) and (max-width: $desktop - 1px)
+    {block}
+
+desktop()
+  @media screen and (min-width: $desktop)
+    {block}
+
+.hidden-mobile
+  +mobile()
+    display none!important
+
+.hidden-tablet
+  +tablet()
+    display none!important
+
+.hidden-desktop
+  +desktop()
+    display none!important

@@ -7,8 +7,8 @@
       div(v-text="formattedName")
       .product__type(v-text="type")
     .product__details
-      div
-        .product__price(v-text="formattedPrice")
+      .product__price
+        .product__price__value(v-text="formattedPrice")
         .product__size(v-text="size")
       StarRating(:rating="rating")
 </template>
@@ -85,50 +85,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.products
-  display flex
-  flex-flow row wrap
-  overflow hidden
-
-.product
-  border-bottom 1px solid #efefef
-  box-shadow 0
-  cursor pointer
-  margin 0 8px 4px
-  transition all .25s
-  width calc(25% - 16px)
-
-  &:hover
-    box-shadow 0px 0px 15px 5px #f1f1f1
-
-  &__image
-    img
-      width 100%
-
-  &__name
-    font-size 1rem
-    font-weight 700
-    min-height 85px
-    padding 0 16px
-    text-align center
-
-  &__type
-    font-size .75rem
-    font-weight 100
-    text-align center
-
-  &__details
-    display flex
-    flex-direction row
-    justify-content space-between
-    padding 8px 16px
-
-  &__price
-    font-weight 700
-
-  &__size
-    font-size .65rem
-    text-transform lowercase
-</style>
