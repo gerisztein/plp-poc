@@ -14,13 +14,23 @@
   h1
     font-size 3rem
     font-weight 700
-    margin 0
+    margin 0 0 16px
+    padding 0 16px
+
+    +desktop()
+      padding 0
 
   &__filter
-    display flex
+    display none
     flex-flow row wrap
     margin-bottom 8px
     overflow hidden
+
+    +tablet()
+      display flex
+
+    &:empty
+      display none
 
     &__title
       align-self center
@@ -51,10 +61,18 @@
           color #fff
 
   &__sort
+    display flex
+    flex-flow row
     flex-grow 1
+    padding 0 8px
+
     +tablet()
+      flex-flow row
       flex-grow 0
 
+    +desktop()
+      flex-flow column
+      flex-grow 1
   &__list
     display flex
     flex-flow row wrap

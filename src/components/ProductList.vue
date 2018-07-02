@@ -10,7 +10,7 @@
           span.products__filter__option(v-for="option in filter", @click="removeFilter({ option: option, type: name })")
             span.products__filter__option--close X
             span(v-text="option")
-      Sorting(:selected="activeSorting")
+      ProductSort(:selected="activeSorting")
 
     .products__list
       template(v-for="(product, index) in productList")
@@ -32,14 +32,14 @@
 import { mapActions, mapGetters } from 'vuex'
 import ProductCard from './ProductCard'
 import ProductFilter from './ProductFilter'
-import Sorting from './Sorting'
+import ProductSort from './ProductSort'
 
 export default {
   name: 'ProductList',
   components: {
     ProductCard,
     ProductFilter,
-    Sorting
+    ProductSort
   },
   mounted () {
     this.getProducts()

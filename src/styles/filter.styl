@@ -5,24 +5,79 @@
   height fit-content
   justify-content flex-end
   min-width 160px
-  padding 8px 0
 
   +tablet()
     flex-flow row
+    padding 8px 0
 
-  +desktop()
-    flex-flow row
+  &__container
+    background #fff
+    height 100vh
+    padding 16px
+    position absolute
+    right -100%
+    top 0
+    transition all .25s
+    width 100%
+    z-index 10
+
+    +tablet()
+      background none
+      display flex
+      height auto
+      padding 0
+      position unset
+      right auto
+      top auto
+      width auto
+
+    &.active
+      right 0
+
+  &__header
+    display flex
+    justify-content space-between
+    margin-bottom 32px
+
+    +tablet()
+      display none
+
+    &__title
+      font-size 2rem
+      font-weight 700
+
+    &__close
+      font-size 2rem
+      padding 0 8px
+
+  &__cta
+    background #fff
+    border 1px solid #efefef
+    font-weight 700
+    height 32px
+    margin-right 4px
+
+    +tablet()
+      display none
+
+    +desktop()
+      display none
 
   &__category
+    height 48px
     min-width 150px
     position relative
 
     +tablet()
+      height auto
       margin 0 0 0 16px
+
       &:first-child
         margin 0
+
     +desktop()
       margin 0 0 0 16px
+
       &:first-child
         margin 0
 
@@ -81,10 +136,14 @@
     &__options
       display flex
       flex-flow column
-      font-size .75rem
-      max-height 200px
+      font-size 1rem
+      max-height auto
       overflow auto
       padding 16px 8px 0
+
+      +tablet()
+        font-size .75rem
+        max-height 200px
 
       label
         cursor pointer
