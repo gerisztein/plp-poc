@@ -10,12 +10,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
+      component: Home,
+      props: (route) => ({
+        sort: route.query.sort
+      })
     }
   ]
 })
