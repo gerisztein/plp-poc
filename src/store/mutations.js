@@ -2,6 +2,14 @@ import * as types from './mutation-types'
 
 const mutations = {
   [types.SET_ACTIVE_FILTER] (state, { option, type }) {
+    if (!option && !type) {
+      for (let i in state.activeFilters) {
+        state.activeFilters[i] = []
+      }
+
+      return
+    }
+
     if (state.activeFilters[type].includes(option)) {
       const index = state.activeFilters[type].indexOf(option)
 

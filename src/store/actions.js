@@ -60,8 +60,15 @@ const actions = {
   },
 
   setFilter ({ commit, dispatch }, option, type) {
-    commit(types.SET_ACTIVE_FILTER, option, type)
-    dispatch('filterProducts')
+    if (option) {
+      commit(types.SET_ACTIVE_FILTER, option, type)
+      dispatch('filterProducts')
+    }
+
+    if (!option) {
+      commit(types.SET_ACTIVE_FILTER, {})
+      dispatch('getProducts')
+    }
   },
 
   setSorting ({ commit, state }, data) {

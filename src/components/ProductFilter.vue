@@ -25,6 +25,8 @@
               span(v-text="option")
         .filter__category__action
           button(@click='selectFilter(filter.type)') Apply
+    .filter__category__action.hidden-tablet.hidden-desktop
+      button(@click='selectFilter()') Clear all filters
 </template>
 
 <script>
@@ -55,15 +57,25 @@ export default {
   methods: {
     ...mapActions(['setFilter']),
 
-    selectFilter (type) {
-      const option = this.model[type]
+    clearModel () {
+      for (let type in this.model) {
+        this.model[type] = []
+      }
+    },
 
-      this.$router.push({
-        name: 'home',
-        brand: option
-      })
-      this.setFilter({ option, type })
-      this.toggleFilter(type)
+    selectFilter (type) {
+      if (type) {
+        const option = this.model[type]
+
+        this.setFilter({ option, type })
+        this.toggleFilter(type)
+      }
+
+      if (!type) {
+        this.setFilter()
+        this.clearModel()
+      }
+
       this.toggleContainer()
     },
 

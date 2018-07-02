@@ -13,7 +13,7 @@
       ProductSort(:selected="activeSorting")
 
     .products__list
-      template(v-for="(product, index) in productList")
+      template(v-for="(product, index) in productList", v-if="productList")
         ProductCard(
           :brand="product.brand",
           :id="product.id",
@@ -26,6 +26,8 @@
           :slug="product.slug",
           :type="product.type"
         )
+      template(v-else)
+        h1 No products found :(
 </template>
 
 <script>

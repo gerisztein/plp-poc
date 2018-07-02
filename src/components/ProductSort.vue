@@ -8,7 +8,7 @@
       :class="{ active: option.value === sorting }",
       @click="sort(option.value)"
     )
-  .sorting__mobile.hidden-desktop
+  .sorting__mobile.hidden-tablet.hidden-desktop
     label(for="sort") Sort
     select(id="sort", v-model="model", @change="sort(model)")
       option(
